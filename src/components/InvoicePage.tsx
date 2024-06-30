@@ -35,7 +35,6 @@ interface Props {
 const InvoicePage: FC<Props> = ({ data, pdfMode, onChange }) => {
   const [invoice, setInvoice] = useState<Invoice>(data ? { ...data } : { ...initialInvoice })
   const [subTotal, setSubTotal] = useState<number>()
-  const [saleTax, setSaleTax] = useState<number>()
 
   const dateFormat = 'MMM dd, yyyy'
   const invoiceDate = invoice.invoiceDate !== '' ? new Date(invoice.invoiceDate) : new Date()
@@ -125,13 +124,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange }) => {
     setSubTotal(subTotal)
   }, [invoice.productLines])
 
-  useEffect(() => {
-    const match = invoice.taxLabel.match(/(\d+)%/)
-    const taxRate = match ? parseFloat(match[1]) : 0
-    const saleTax = subTotal ? (subTotal * taxRate) / 100 : 0
 
-    setSaleTax(saleTax)
-  }, [subTotal, invoice.taxLabel])
 
   useEffect(() => {
     if (onChange) {
