@@ -1,4 +1,5 @@
 import InvoicePage from './components/InvoicePage'
+import WorkingDays from './components/WorkingDays'
 import { Invoice } from './data/types'
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   return (
     <div className="app">
       <h1 className="center fs-30">Freelance Invoice Generator</h1>
+      <WorkingDays />
       <InvoicePage data={data} onChange={onInvoiceUpdated} />
     </div>
   )
